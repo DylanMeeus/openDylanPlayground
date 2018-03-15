@@ -5,7 +5,7 @@ Copyright:
 
 define function main
     (name :: <string>, arguments :: <vector>)
-  (euler1());
+    format-out("%d\n",(euler2()));
   exit-application(0);
 end function main;
 
@@ -21,5 +21,22 @@ define function euler1 () => ()
 
 end function euler1;
 
+
+define function euler2 () => (<Integer>)
+    let sum :: <Integer> = 0;
+    let x :: <Integer> = 0;
+    let y :: <Integer> = 1;
+    // define z outside for performance
+    let z :: <Integer> = x + y;
+    while (y < 4000000)
+        z := x + y;
+        if (even?(z))
+            sum := sum + z;
+        end if;
+        x := y;
+        y := z;
+    end while;
+    sum;
+end function euler2;
 
 main(application-name(), application-arguments());
