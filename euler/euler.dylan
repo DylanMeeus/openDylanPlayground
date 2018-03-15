@@ -5,7 +5,7 @@ Copyright:
 
 define function main
     (name :: <string>, arguments :: <vector>)
-    format-out("%d\n",(euler2()));
+    format-out("%d\n",(euler4()));
   exit-application(0);
 end function main;
 
@@ -22,7 +22,7 @@ define function euler1 () => ()
 end function euler1;
 
 
-define function euler2 () => (<Integer>)
+define function euler2 () => (sum :: <Integer>)
     let sum :: <Integer> = 0;
     let x :: <Integer> = 0;
     let y :: <Integer> = 1;
@@ -38,5 +38,27 @@ define function euler2 () => (<Integer>)
     end while;
     sum;
 end function euler2;
+
+// largest palindrome function, 3 digits
+define function euler4 () => (largest :: <Integer>)
+    let largest = 0;
+
+    local method isPalindrome? (p :: <Integer>) 
+          let s = integer-to-string(p);
+          s = reverse(s);
+    end isPalindrome?;
+
+    for(i :: <Integer> from 100 to 999)
+        for(j :: <Integer> from 100 to 999)
+            let z = i * j;
+            if (isPalindrome?(z) & z > largest)
+                largest := z;
+            end if;
+        end for;
+    end for;
+    largest;
+end function euler4;
+
+
 
 main(application-name(), application-arguments());
