@@ -1,0 +1,17 @@
+1. You are standing on the top of a roof top, in front of you is a table, at the right there is a
+door. What do you do?
+| a. Inspect table |> 2
+| b. Walk to door |> 
+| c. Jump off roof |> 4
+
+2. The table contains a medkit, a shotgun and an uzi. 
+| a. Take shotgun, medkit |> 1
+| b. Take uzi, medkit |> 1
+| c. Walk to door |> 3
+
+3. The door leads to a staircase, go down?
+| a. Take me down! |> 4
+| b. Hell no! |> 4
+
+
+4. You died.
