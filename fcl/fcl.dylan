@@ -8,15 +8,21 @@ define function main
     (name :: <string>, arguments :: <vector>)
     
     // parse flow.fcl
-    println("done");
+    println("opening file..");
+
+
     with-open-file (stream = "../../flow.fcl", element-type: <byte-vector>)
+        let current-question = "";
         while(~stream-at-end?(stream))
             let line = read-line(stream);
             // is it a question
             if (starts-with?(line,"#"))
-                let q = make(<question>, question: line);
-                print-question(q);
+                current-question := make(<question>, question: line);
+                print-question(current-question);
+            elseif (starts-with?(line,"|"))
+                println(line);
             end if;
+
 
         end while;
     end;
