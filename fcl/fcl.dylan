@@ -1,7 +1,8 @@
 Module: fcl
-Synopsis: 
-Author: 
-Copyright: 
+Synopsis: Flow Charn Language (or something of the likes)
+Author: Dylan
+Copyright: N/A
+
 
 define function main
     (name :: <string>, arguments :: <vector>)
@@ -10,8 +11,13 @@ define function main
     println("done");
     with-open-file (stream = "../../flow.fcl", element-type: <byte-vector>)
         while(~stream-at-end?(stream))
-            let el = read-element(stream);
-            format-out("%s",el);
+            let line = read-line(stream);
+            // is it a question
+            if (starts-with?(line,"#"))
+                let q = make(<question>, question: line);
+                print-question(q);
+            end if;
+
         end while;
     end;
 
@@ -27,8 +33,31 @@ end function parse-stream;
 
 
 // utility function because I'm an idiot and keep forgetting \n
-define function println(t :: <byte-string>) => ()
+define function println(t :: <object>) => ()
     format-out("%s\n",t);
 end function println;
 
+
+// now for the fun part, parse the elements into sensible groups?
+define class <answer-statement> (<object>)
+    slot answer :: <string>, init-keyword: answer:;
+    slot goto :: <integer>, init-keyword: goto:;
+end class <answer-statement>;
+
+// question
+define class <question> (<object>)
+    slot question :: <string>, init-keyword: question:;
+end class <question>;
+
+
+define method add-answer(answer :: <answer-statement>)
+end method add-answer;
+
+define method print-question(q :: <question>) => ()
+    println(q.question);
+end method;
+
+
 main(application-name(), application-arguments());
+
+
